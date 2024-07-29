@@ -1,0 +1,61 @@
+<odoo>
+    <data>
+
+        <!-- <template id="report_picking">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.external_layout">
+                        <div class="page"> -->
+
+        <template id="custom_report_template">
+            <t t-call="web.html_container">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <br/>
+                        <h2 class="text-center" style="border: 1px solid lightgray; padding: 10px 10px;">
+                            <span>Example Title</span>
+                        </h2>
+                        <br/>
+                        <br/>
+                        <table class="table table-bordered table-sm text-center">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th scope="col">First Column</th>
+                                </tr>
+                            </thead>
+                            <tbody class="sale_tbody">
+                                <t t-foreach="docs" t-as="doc">
+                                    <tr>
+                                        <td>First Data in Column</td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                        <td>
+                            <t t-foreach="docs" t-as="o">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <p>Name:</p>
+                                        </td>
+                                        <td>
+                                            <p t-field="o.name"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </t>
+                        </td>
+                    </div>
+                </t>
+            </t>
+        </template>
+
+        <report id="custom_report_action"
+            model="sekolah.siswa"
+            string="Example (PDF)"
+            report_type="qweb-pdf"
+            name="addons_sekolah.custom_report_template"
+            menu="False"/>
+        
+    </data>
+</odoo>

@@ -1,0 +1,7 @@
+<odoo>
+    <menuitem id="menu_sekolah_root" name="Sekolah"/>
+    <menuitem id="menu_sekolah_siswa" name="Siswa" parent="menu_sekolah_root" action="action_siswa"/>
+    <menuitem id="menu_sekolah_kelas" name="Kelas" parent="menu_sekolah_root" action="action_kelas"/>
+    <menuitem id="menu_sekolah_guru" name="Guru" parent="menu_sekolah_root" action="action_guru"/>
+    <menuitem id="menu_sekolah_mata_pelajaran" name="Mata Pelajaran" parent="menu_sekolah_root" action="action_mata_pelajaran"/>
+</odoo>
