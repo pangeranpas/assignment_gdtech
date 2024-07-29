@@ -4,25 +4,20 @@
         <field name="model">sekolah.report.wizard</field>
         <field name="arch" type="xml">
             <form string="Generate Siswa Report">
-                <!-- <group>
-                    <field name="start_date"/>
-                    <field name="end_date"/>
-                </group> -->
+                Cetak Report?
                 <footer>
-                    <button string="Generate Report" type="object" name="generate_report" class="btn-primary"/>
+                    <button string="Generate Report" type="object" name="get_report" class="btn-primary"/>
                     <button string="Cancel" class="btn-secondary" special="cancel"/>
                 </footer>
             </form>
         </field>
     </record>
 
-    <record id="action_siswa_report_wizard" model="ir.actions.act_window">
-        <field name="name">Siswa Report Wizard</field>
-        <field name="res_model">sekolah.report.wizard</field>
-        <field name="view_mode">form</field>
-        <field name="view_id" ref="view_siswa_report_wizard_form"/>
-        <field name="target">new</field>
-    </record>
+    <act_window id="action_siswa_report_wizard"
+                name="Siswa Report"
+                res_model="sekolah.report.wizard"
+                view_mode="form"
+                target="new"/>
 
     <menuitem id="menu_siswa_report_wizard" name="Generate Siswa Report" parent="menu_sekolah_root" action="action_siswa_report_wizard"/>
 </odoo>

@@ -1,60 +1,68 @@
 <odoo>
     <data>
 
-        <!-- <template id="report_picking">
+        <template id="siswa_report_view">
             <t t-call="web.html_container">
-                <t t-foreach="docs" t-as="o">
-                    <t t-call="web.external_layout">
-                        <div class="page"> -->
-
-        <template id="custom_report_template">
-            <t t-call="web.html_container">
-                <t t-call="web.external_layout">
-                    <div class="page">
-                        <br/>
-                        <h2 class="text-center" style="border: 1px solid lightgray; padding: 10px 10px;">
-                            <span>Example Title</span>
-                        </h2>
-                        <br/>
-                        <br/>
-                        <table class="table table-bordered table-sm text-center">
-                            <thead class="thead-light">
+                <div class="header" style="border-bottom: 2px solid black">
+                    <h3 class="text-center">Siswa Report</h3>
+                </div>
+                <div class="article">
+                    <table class="table table-condensed table-bordered" style="width: 100%">
+                        <thead>
+                            <th class="text-center" style="width: 70%">Nama Siswa</th>
+                            <th class="text-center" style="width: 15%">Tanggal Lahir</th>
+                            <th class="text-center" style="width: 15%">Kelas</th>
+                            <th class="text-center" style="width: 15%">Guru</th>
+                            <th class="text-center" style="width: 15%">Mata Pelajaran</th>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="docs" t-as="doc">
                                 <tr>
-                                    <th scope="col">First Column</th>
+                                    <td>
+                                        <span t-esc="doc['siswa']"/>
+                                    </td>
+                                    <td class="text-center">
+                                        <span t-esc="doc['date_of_birth']"/>
+                                    </td>
+                                    <td class="text-center">
+                                        <span t-esc="doc['kelas']"/>
+                                    </td>
+                                    <td class="text-center">
+                                        <span t-esc="doc['guru']"/>
+                                    </td>
+                                    <td class="text-center">
+                                        <span t-esc="doc['mata_pelajaran']"/>
+                                    </td>
                                 </tr>
-                            </thead>
-                            <tbody class="sale_tbody">
-                                <t t-foreach="docs" t-as="doc">
-                                    <tr>
-                                        <td>First Data in Column</td>
-                                    </tr>
-                                </t>
-                            </tbody>
-                        </table>
-                        <td>
-                            <t t-foreach="docs" t-as="o">
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <p>Name:</p>
-                                        </td>
-                                        <td>
-                                            <p t-field="o.name"/>
-                                        </td>
-                                    </tr>
-                                </table>
                             </t>
-                        </td>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="footer">
+                    <div class="row text-center" style="border-top: 1px solid black;">
+                        <div class="col col-3 offset-9 text-right">
+                            <ul class="list-inline mt-2">
+                                <li class="list-inline-item">Page:</li>
+                                <li class="list-inline-item">
+                                    <span class="page"/>
+                                </li>
+                                <li class="list-inline-item">/</li>
+                                <li class="list-inline-item">
+                                    <span class="topage"/>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                </t>
+                </div>
             </t>
         </template>
 
-        <report id="custom_report_action"
-            model="sekolah.siswa"
-            string="Example (PDF)"
+
+        <report id="recap_report"
+            model="sekolah.report.wizard"
+            string="Siswa Report"
             report_type="qweb-pdf"
-            name="addons_sekolah.custom_report_template"
+            name="addons_sekolah.siswa_report_view"
             menu="False"/>
         
     </data>

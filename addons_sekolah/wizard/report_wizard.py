@@ -4,56 +4,36 @@ class SiswaReportWizard(models.TransientModel):
     _name = 'sekolah.report.wizard'
     _description = 'Wizard for generating Siswa report'
 
-    def generate_report(self):
+    def get_report(self):
         """Call when button 'Get Report' clicked.
         """
-
-        sort = "id"
-      
-        domain = []
-        
-        lines = self.env['sekolah.siswa'].search(domain,order=sort)
-
-        docs = []
-        
-        for line in lines:
-
-            docs.append({
-                'name': line.name or False,
-            })
-                
         data = {
-            'doc_ids': self.ids,
-            'doc_model': self._name,
-            'docs': docs,
+            'ids': self.ids,
+            'model': self._name,
+            'form': {
+            },
         }
-        
-        # use `module_name.report_id` as reference.
-        # `report_action()` will call `get_report_values()` and pass `data` automatically.
-        return self.env.ref('addons_sekolah.custom_report_action').report_action(self, data=data)
-    
-    # def generate_report(self):
-    #     # Fetch all student records
-    #     students = self.env['sekolah.siswa'].search([])
-    #     data = {
-    #         'doc_ids': students.ids,
-    #         'doc_model': 'sekolah.siswa',
-    #         'docs': students,
-    #     }
-    #     return self.env.ref('addons_sekolah.custom_report_action').report_action(self, data=data)
+        return self.env.ref('addons_sekolah.recap_report').report_action(self, data=data)
 
-class ReportExampleWizard(models.AbstractModel):
-    """Abstract Model for report template.
-    for `_name` model, please use `report.` as prefix then add `module_name.report_name`.
-    """
-
-    _name = 'report.addons_sekolah.custom_report_template'
+class ReportSiswa(models.AbstractModel):
+    _name = 'report.addons_sekolah.siswa_report_view'
 
     @api.model
     def _get_report_values(self, docids, data=None):
-        docs = self.env['sekolah.siswa'].browse(docids)
+        docs = []
+        siswas = self.env['sekolah.siswa'].search([], order='name asc')
+        for siswa in siswas:
+            
+            docs.append({
+                'siswa': siswa.name,
+                'date_of_birth': siswa.date_of_birth,
+                'kelas': siswa.kelas_id.name,
+                'guru': siswa.guru_id.name,
+                'mata_pelajaran': siswa.mata_pelajaran_id.name,
+            })
+
         return {
-            'doc_ids': docids,
-            'doc_model': 'sekolah.siswa',
+            'doc_ids': data['ids'],
+            'doc_model': data['model'],
             'docs': docs,
         }
